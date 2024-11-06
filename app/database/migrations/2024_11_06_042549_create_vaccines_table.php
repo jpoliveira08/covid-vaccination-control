@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vaccines', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->string('batch_number', 20);
+            $table->string('batch', 45);
             $table->date('expiration_date');
             $table->timestamps();
             $table->softDeletes();
