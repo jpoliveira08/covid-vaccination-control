@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreVaccineRequest;
 use App\Models\Vaccine;
 use Illuminate\Http\Request;
 
@@ -26,13 +27,9 @@ class VaccineController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreVaccineRequest $request)
     {
-        $vaccine = Vaccine::create([
-            'name' => request('name'),
-            'batch' => request('batch'),
-            'expiration_date' => request('expiration_date'),
-        ]);
+        $vaccine = Vaccine::create($request->validated());
 
         return redirect()->route('vaccine.show', $vaccine);
     }
