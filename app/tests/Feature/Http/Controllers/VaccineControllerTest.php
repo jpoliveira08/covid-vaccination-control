@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Livewire\Tables\VaccineTable;
 use App\Models\Vaccine;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
@@ -10,6 +11,27 @@ use Tests\TestCase;
 class VaccineControllerTest extends TestCase
 {
     use RefreshDatabase;
+
+    #[Test]
+    public function it_can_render_create_view()
+    {
+        $this->get(route('vaccine.create'))
+            ->assertStatus(200);
+    }
+
+    #[Test]
+    public function it_can_render_index_view()
+    {
+        $this->get(route('vaccine.index'))
+            ->assertStatus(200);
+    }
+
+    #[Test]
+    public function it_should_renders_table_on_index_page()
+    {
+        $this->get(route('vaccine.index'))
+            ->assertSeeLivewire(VaccineTable::class);
+    }
 
     #[Test]
     public function it_creates_vaccine(): void

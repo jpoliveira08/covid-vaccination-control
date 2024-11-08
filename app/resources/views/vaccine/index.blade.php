@@ -6,4 +6,5 @@
         <i class="fa-solid fa-plus"></i>
         Vaccine
     </a>
+    <livewire:tables.vaccine-table/>
 </x-layout>

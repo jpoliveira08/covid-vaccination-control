@@ -32,7 +32,10 @@
         </div>
         <div class="col py-3">
             <h1>{{ $heading }}</h1>
-            {{ $slot }}
+            <hr>
+            <div class="container">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 </div>
