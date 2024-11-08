@@ -3,32 +3,29 @@
 namespace Tests\Feature\Http\Requests;
 
 use App\Http\Requests\StoreVaccineRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class StoreVaccineRequestTest extends TestCase
 {
-
     #[Test]
-    public function it_has_the_correct_rules()
+    public function it_has_the_correct_rules(): void
     {
-        $request = new StoreVaccineRequest();
+        $request = new StoreVaccineRequest;
 
         $rules = [
             'name' => ['required', 'string'],
             'batch' => ['required', 'string'],
-            'expiration_date' => ['required', 'string']
+            'expiration_date' => ['required', 'string'],
         ];
 
         $this->assertEquals($rules, $request->rules());
     }
 
     #[Test]
-    public function it_authorizes_every_request()
+    public function it_authorizes_every_request(): void
     {
-        $request = new StoreVaccineRequest();
+        $request = new StoreVaccineRequest;
 
         $this->assertEquals(true, $request->authorize());
     }

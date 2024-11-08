@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVaccineRequest;
@@ -13,7 +15,7 @@ class VaccineController extends Controller
      */
     public function index()
     {
-        //
+        return view('vaccine.index');
     }
 
     /**
@@ -21,7 +23,7 @@ class VaccineController extends Controller
      */
     public function create()
     {
-        //
+        return view('vaccine.create');
     }
 
     /**

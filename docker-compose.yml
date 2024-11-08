@@ -18,7 +18,6 @@ services:
     networks:
       - laravel
     restart: unless-stopped
-
   mysql:
     image: mysql:8.4.0
     container_name: mysql
@@ -29,12 +28,12 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql/
+      - ./dockerfiles/mysql/my.cnf:/etc/mysql/my.cnf
     ports:
       - "${FORWARD_DB_PORT:-3306}:3306"
     networks:
       - laravel
     restart: unless-stopped
-
   php:
     container_name: "php"
     build:
@@ -51,7 +50,6 @@ services:
     networks:
       - laravel
     restart: unless-stopped
-
   redis:
     container_name: "redis"
     image: redis:alpine
@@ -83,7 +81,7 @@ services:
       - laravel
   npm:
     container_name: "npm"
-    image: node:current-alpine
+    image: node:18.20-alpine
     volumes:
       - ./app:/var/www/html
     ports:

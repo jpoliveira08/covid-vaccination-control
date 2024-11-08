@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers;
 
 use App\Models\Vaccine;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -22,7 +21,7 @@ class VaccineControllerTest extends TestCase
             ->post(route('vaccine.store'), [
                 'name' => 'Pfizer',
                 'batch' => '72O627H',
-                'expiration_date' => '2027-11-06'
+                'expiration_date' => '2027-11-06',
             ]);
 
         $vaccine = Vaccine::first();
@@ -42,7 +41,7 @@ class VaccineControllerTest extends TestCase
             ->post(route('vaccine.store'), [
                 'name' => '',
                 'batch' => '',
-                'expiration_date' => ''
+                'expiration_date' => '',
             ]);
 
         $this->assertEquals(0, Vaccine::count());
@@ -50,8 +49,7 @@ class VaccineControllerTest extends TestCase
         $response->assertSessionHasErrors([
             'name',
             'batch',
-            'expiration_date'
+            'expiration_date',
         ]);
     }
-
 }

@@ -27,7 +27,7 @@ class VaccineFactory extends Factory
         return [
             'name' => $this->faker->randomElement(['Pfizer', 'AstraZeneca', 'Johnson']),
             'batch' => strtoupper($this->faker->bothify('##?###?')),
-            'expiration_date' => $this->faker->dateTimeBetween('+1 year', '+3 years')
+            'expiration_date' => $this->faker->dateTimeBetween('+1 year', '+3 years'),
         ];
     }
 }

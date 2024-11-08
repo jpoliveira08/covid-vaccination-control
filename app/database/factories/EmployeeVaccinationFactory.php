@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\{Employee, EmployeeVaccination, Vaccine};
+use App\Models\Employee;
+use App\Models\EmployeeVaccination;
+use App\Models\Vaccine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,7 +30,7 @@ class EmployeeVaccinationFactory extends Factory
             'employee_id' => Employee::factory(),
             'vaccine_id' => Vaccine::factory(),
             'dose_number' => $this->faker->numberBetween(1, 3),
-            'dose_date' => $this->faker->dateTimeBetween('-1 year', 'now')
+            'dose_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
