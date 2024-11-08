@@ -34,6 +34,17 @@ services:
     networks:
       - laravel
     restart: unless-stopped
+  testdb:
+    image: mysql:8.4.0
+    tmpfs: /var/lib/mysql
+    container_name: testdb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - laravel
   php:
     container_name: "php"
     build:
@@ -47,6 +58,9 @@ services:
     volumes:
       - ./app:/var/www/html:delegated
       - ./dockerfiles/configs/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - ./dockerfiles/configs/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    extra_hosts:
+      - host.docker.internal:host-gateway
     networks:
       - laravel
     restart: unless-stopped
