@@ -18,9 +18,9 @@
                 <label for="inputExpirationDate" class="form-label">Expiration date</label>
                 <input type="date" class="form-control" id="inputExpirationDate" name="expiration_date">
             </div>
-        </div>
-        <div class="row">
-            <button type="submit" class="btn btn-success">Save</button>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-success">Save</button>
+            </div>
         </div>
     </form>
 </x-layout>

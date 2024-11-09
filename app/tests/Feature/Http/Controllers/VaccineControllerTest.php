@@ -53,7 +53,7 @@ class VaccineControllerTest extends TestCase
         $this->assertEquals('2027-11-06', $vaccine->expiration_date);
 
         $response->assertSeeText('Pfizer');
-        $this->assertEquals(route('vaccine.show', $vaccine), url()->current());
+        $this->assertEquals(route('vaccine.index'), url()->current());
     }
 
     #[Test]
@@ -73,5 +73,15 @@ class VaccineControllerTest extends TestCase
             'batch',
             'expiration_date',
         ]);
+    }
+
+    #[Test]
+    public function it_deletes_vaccine()
+    {
+        $vaccine = Vaccine::factory()->create();
+
+        $this->delete(route('vaccine.destroy', $vaccine));
+
+        $this->assertEquals(0, Vaccine::count());
     }
 }

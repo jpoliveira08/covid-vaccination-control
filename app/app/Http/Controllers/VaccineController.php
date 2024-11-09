@@ -31,9 +31,9 @@ class VaccineController extends Controller
      */
     public function store(StoreVaccineRequest $request)
     {
-        $vaccine = Vaccine::create($request->validated());
+        Vaccine::create($request->validated());
 
-        return redirect()->route('vaccine.show', $vaccine);
+        return redirect()->route('vaccine.index');
     }
 
     /**
@@ -44,27 +44,10 @@ class VaccineController extends Controller
         return view('vaccine.show', compact('vaccine'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Vaccine $vaccine)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Vaccine $vaccine)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Vaccine $vaccine)
     {
-        //
+        $vaccine->delete();
+
+        return to_route('vaccine.index');
     }
 }

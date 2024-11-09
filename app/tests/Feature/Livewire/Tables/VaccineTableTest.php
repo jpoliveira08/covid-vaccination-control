@@ -39,4 +39,14 @@ class VaccineTableTest extends TestCase
         Livewire::test(VaccineTable::class)
             ->assertHasAction('view');
     }
+
+    #[Test]
+    public function it_shows_the_delete_button_when_records_exist()
+    {
+        Vaccine::factory()->create();
+        $this->assertEquals(1, Vaccine::count());
+
+        Livewire::test(VaccineTable::class)
+            ->assertHasAction('delete');
+    }
 }
