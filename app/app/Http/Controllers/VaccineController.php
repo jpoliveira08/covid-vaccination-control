@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVaccineRequest;
 use App\Models\Vaccine;
-use Illuminate\Http\Request;
 
 class VaccineController extends Controller
 {
@@ -33,7 +32,7 @@ class VaccineController extends Controller
     {
         Vaccine::create($request->validated());
 
-        return redirect()->route('vaccine.index');
+        return to_route('vaccine.index');
     }
 
     /**

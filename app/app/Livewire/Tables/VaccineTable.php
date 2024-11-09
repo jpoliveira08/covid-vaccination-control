@@ -51,14 +51,14 @@ final class VaccineTable extends PowerGridComponent
                 ->class('btn btn-light btn-sm')
                 ->attributes([
                     'data-bs-toggle' => 'modal',
-                    'data-bs-target' => '#viewVaccineModal'
+                    'data-bs-target' => '#viewVaccineModal',
                 ]),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('btn btn-danger btn-sm')
                 ->attributes([
                     'data-bs-toggle' => 'modal',
-                    'data-bs-target' => '#deleteVaccineModal'
+                    'data-bs-target' => '#deleteVaccineModal',
                 ]),
         ];
     }

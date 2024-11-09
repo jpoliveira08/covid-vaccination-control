@@ -9,6 +9,7 @@
     @endsection
     @section('content')
         <x-vaccine.buttons.new-button/>
+        <x-vaccine.modals.create-modal/>
         <livewire:tables.vaccine-table/>
     @endsection
 @endsection

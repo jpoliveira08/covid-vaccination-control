@@ -5,7 +5,6 @@ namespace Tests\Feature\Livewire\Tables;
 use App\Livewire\Tables\VaccineTable;
 use App\Models\Vaccine;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;

@@ -1,4 +1,4 @@
-<a href="{{ route('vaccine.create') }}" class="btn btn-primary">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createVaccineModal">
     <i class="fa-solid fa-plus"></i>
-    New vaccine
-</a>
+    New
+</button>

@@ -13,13 +13,6 @@ class VaccineControllerTest extends TestCase
     use RefreshDatabase;
 
     #[Test]
-    public function it_can_render_create_view()
-    {
-        $this->get(route('vaccine.create'))
-            ->assertStatus(200);
-    }
-
-    #[Test]
     public function it_can_render_index_view()
     {
         $this->get(route('vaccine.index'))
