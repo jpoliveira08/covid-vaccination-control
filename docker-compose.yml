@@ -36,7 +36,6 @@ services:
     restart: unless-stopped
   testdb:
     image: mysql:8.4.0
-    tmpfs: /var/lib/mysql
     container_name: testdb
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}

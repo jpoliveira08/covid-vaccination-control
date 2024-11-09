@@ -1,5 +1,17 @@
-<x-layout>
-    <x-slot:heading>
+@extends('layout.layout')
+
+@section('title')
+    Home
+@endsection
+
+@section('content')
+    @section('page_title')
         Home
-    </x-slot:heading>
-</x-layout>
+    @endsection
+    @section('content')
+        Welcome
+    @endsection
+@endsection
+
+
+
