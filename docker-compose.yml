@@ -44,6 +44,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     networks:
       - laravel
+    restart: unless-stopped
   php:
     container_name: "php"
     build:

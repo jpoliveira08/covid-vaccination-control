@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Http\Requests;
+namespace Tests\Feature\Http\Requests\Vaccine;
 
 use App\Http\Requests\Vaccine\StoreVaccineRequest;
 use PHPUnit\Framework\Attributes\Test;
