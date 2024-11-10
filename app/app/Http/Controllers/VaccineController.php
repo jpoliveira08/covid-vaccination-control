@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVaccineRequest;
 use App\Models\Vaccine;
+use Illuminate\Http\JsonResponse;
 
 class VaccineController extends Controller
 {
@@ -43,11 +44,16 @@ class VaccineController extends Controller
         return response()->json($vaccine);
     }
 
-    public function destroy(Vaccine $vaccine)
+    /**
+     * @param Vaccine $vaccine
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Vaccine $vaccine): JsonResponse
     {
-        dd($vaccine);
         $vaccine->delete();
 
-        return to_route('vaccine.index');
+        return response()->json([
+            'message' => 'The vaccine was successfully deleted.',
+        ]);
     }
 }

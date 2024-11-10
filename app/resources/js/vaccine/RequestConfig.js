@@ -1,9 +1,8 @@
-const CreateRequestConfig = (method = 'POST', body = null) => {
+const RequestConfig = (method = 'POST', body = null) => {
     const config = {
         method: method,
         credentials: 'same-origin',
         headers: {
-            'Content-Type': 'application/json',
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         },
     };
@@ -15,4 +14,4 @@ const CreateRequestConfig = (method = 'POST', body = null) => {
     return config;
 }
 
-export default CreateRequestConfig;
+export default RequestConfig;

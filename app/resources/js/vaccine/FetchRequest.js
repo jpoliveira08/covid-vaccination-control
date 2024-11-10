@@ -1,7 +1,7 @@
-import CreateRequestConfig from "./CreateRequestConfig.js";
+import RequestConfig from "./RequestConfig.js";
 
 const FetchRequest = async (url, method, body) => {
-    const config = CreateRequestConfig(method, body);
+    const config = RequestConfig(method, body);
 
     try {
         const response = await fetch(url, config);
@@ -15,6 +15,8 @@ const FetchRequest = async (url, method, body) => {
 
             throw { status: response.status, message: 'Contact system administrator.' };
         }
+
+        return await response.json();
     } catch (error) {
         throw error;
     }

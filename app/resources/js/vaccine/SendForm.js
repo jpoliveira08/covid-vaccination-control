@@ -12,6 +12,11 @@ const SendForm = async (event) => {
     const url = UrlBuilder(formMethod, idVaccine).build();
     try {
         const response = await FetchRequest(url, formMethod, formData);
+        alert(response.message);
+
+        const modal = new Modal('#vaccineModal');
+        modal.hide();
+        location.reload();
     } catch (error) {
         if (error.status === 422) {
             let errorMessages = '';

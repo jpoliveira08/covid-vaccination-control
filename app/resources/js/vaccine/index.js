@@ -53,11 +53,16 @@ window.DeleteVaccine = DeleteVaccine;
 
 let modal = document.getElementById('vaccineModal');
 modal.addEventListener('hidden.bs.modal', event => {
+    document.getElementById('vaccineForm').reset();
     EnableInputs([
         'vaccine-name',
         'vaccine-batch',
         'vaccine-expiration-date'
     ]);
+
+    document.getElementById('form-method').value = 'POST';
+    document.getElementById('vaccine-id').value = '';
+
     let submitButton = document.getElementById('vaccineSubmitButton');
     submitButton.setAttribute('type', 'submit');
     submitButton.textContent = 'Save';
