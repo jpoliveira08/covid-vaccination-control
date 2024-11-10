@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreVaccineRequest;
+use App\Http\Requests\Vaccine\StoreVaccineRequest;
+use App\Http\Requests\Vaccine\UpdateVaccineRequest;
 use App\Models\Vaccine;
 use Illuminate\Http\JsonResponse;
 
@@ -33,7 +34,9 @@ class VaccineController extends Controller
     {
         Vaccine::create($request->validated());
 
-        return to_route('vaccine.index');
+        return response()->json([
+            'message' => 'The vaccine was successfully created',
+        ]);
     }
 
     /**
@@ -54,6 +57,20 @@ class VaccineController extends Controller
 
         return response()->json([
             'message' => 'The vaccine was successfully deleted.',
+        ]);
+    }
+
+    /**
+     * @param UpdateVaccineRequest $request
+     * @param Vaccine $vaccine
+     * @return JsonResponse
+     */
+    public function update(UpdateVaccineRequest $request, Vaccine $vaccine): JsonResponse
+    {
+        $vaccine->update($request->validated());
+
+        return response()->json([
+            'message' => 'The vaccine was successfully updated.',
         ]);
     }
 }

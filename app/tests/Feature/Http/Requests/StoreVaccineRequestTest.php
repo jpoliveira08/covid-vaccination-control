@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Requests;
 
-use App\Http\Requests\StoreVaccineRequest;
+use App\Http\Requests\Vaccine\StoreVaccineRequest;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
