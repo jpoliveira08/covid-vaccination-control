@@ -40,7 +40,7 @@ class VaccineController extends Controller
      */
     public function show(Vaccine $vaccine)
     {
-        return view('vaccine.show', compact('vaccine'));
+        return response()->json($vaccine);
     }
 
     public function destroy(Vaccine $vaccine)

@@ -7,9 +7,13 @@
     @section('page_title')
         Vaccines
     @endsection
-    @section('content')
-        <x-vaccine.buttons.new-button/>
-        <x-vaccine.modals.create-modal/>
+        <x-vaccine.create-button/>
+
+        <x-vaccine.modal>
+            <x-vaccine.form/>
+        </x-vaccine.modal>
+
         <livewire:tables.vaccine-table/>
-    @endsection
 @endsection
+
+

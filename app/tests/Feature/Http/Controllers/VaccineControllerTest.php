@@ -50,6 +50,15 @@ class VaccineControllerTest extends TestCase
     }
 
     #[Test]
+    public function it_shows_a_vaccine_data()
+    {
+        $vaccine = Vaccine::factory()->create();
+
+        $this->get(route('vaccine.show', $vaccine))
+            ->assertStatus(200);
+    }
+
+    #[Test]
     public function it_requires_all_fields_to_be_present(): void
     {
         $response = $this

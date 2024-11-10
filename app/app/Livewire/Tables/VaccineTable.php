@@ -46,19 +46,23 @@ final class VaccineTable extends PowerGridComponent
     public function actions($row): array
     {
         return [
-            Button::add('view')
+            Button::add('show')
                 ->slot('<i class="fa-solid fa-eye"></i>')
                 ->class('btn btn-light btn-sm')
                 ->attributes([
-                    'data-bs-toggle' => 'modal',
-                    'data-bs-target' => '#viewVaccineModal',
+                    'onclick' => "showVaccine({$row->id})",
+                ]),
+            Button::add('edit')
+                ->slot('<i class="fa-solid fa-pen-to-square"></i>')
+                ->class('btn btn-primary btn-sm')
+                ->attributes([
+                    'onclick' => "editVaccine({$row->id})",
                 ]),
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('btn btn-danger btn-sm')
                 ->attributes([
-                    'data-bs-toggle' => 'modal',
-                    'data-bs-target' => '#deleteVaccineModal',
+                    'onclick' => "deleteVaccine({$row->id})",
                 ]),
         ];
     }
