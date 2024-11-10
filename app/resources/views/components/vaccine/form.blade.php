@@ -1,5 +1,7 @@
 <form id="vaccineForm" onsubmit="SendForm(event)">
     @csrf
+    <input type="hidden" id="form-method" value="POST">
+    <input type="hidden" id="vaccine-id" value="">
     <div class="mb-3">
         <label for="vaccine-name" class="form-label">Name</label>
         <input type="text" class="form-control" id="vaccine-name" name="name" required>

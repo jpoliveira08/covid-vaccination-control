@@ -45,6 +45,7 @@ class VaccineController extends Controller
 
     public function destroy(Vaccine $vaccine)
     {
+        dd($vaccine);
         $vaccine->delete();
 
         return to_route('vaccine.index');

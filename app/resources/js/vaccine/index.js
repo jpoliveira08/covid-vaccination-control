@@ -2,6 +2,7 @@ import { Modal } from 'bootstrap'
 import DisableInputs from '../utils/DisableInputs.js';
 import EnableInputs from "../utils/EnableInputs.js";
 import SendForm from "./SendForm.js";
+import DeleteVaccine from "./DeleteVaccine.js";
 
 window.createVaccine = function () {
     const modal = new Modal('#vaccineModal');
@@ -48,6 +49,7 @@ window.showVaccine = async function (idVaccine) {
 };
 
 window.SendForm = SendForm;
+window.DeleteVaccine = DeleteVaccine;
 
 let modal = document.getElementById('vaccineModal');
 modal.addEventListener('hidden.bs.modal', event => {

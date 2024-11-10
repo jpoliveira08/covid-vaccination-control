@@ -62,7 +62,7 @@ final class VaccineTable extends PowerGridComponent
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('btn btn-danger btn-sm')
                 ->attributes([
-                    'onclick' => "deleteVaccine({$row->id})",
+                    'onclick' => "DeleteVaccine({$row->id})",
                 ]),
         ];
     }

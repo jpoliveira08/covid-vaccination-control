@@ -1,37 +1,29 @@
 import {Modal} from "bootstrap";
+import FetchRequest from "./FetchRequest.js";
+import UrlBuilder from "./UrlBuilder.js";
 
 const SendForm = async (event) => {
     event.preventDefault();
 
     const form = event.target;
     const formData = new FormData(form);
-
+    const formMethod = document.getElementById('form-method').value;
+    const idVaccine = document.getElementById('vaccine-id').value;
+    const url = UrlBuilder(formMethod, idVaccine).build();
     try {
-        const response = await fetch('/vaccine', {
-            method: 'POST',
-            credentials: "same-origin",
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
+        const response = await FetchRequest(url, formMethod, formData);
+    } catch (error) {
+        if (error.status === 422) {
             let errorMessages = '';
-            Object.keys(errorData).forEach((field) => {
-                errorMessages += `${field}: ${errorData[field].join(', ')}\n`;
+            Object.keys(error.errors).forEach((field) => {
+                errorMessages += `${field}: ${error.errors[field].join(', ')}\n`;
             });
 
             alert(errorMessages);
-
             return;
         }
 
-        const modal = new Modal('#vaccineModal');
-        modal.hide();
-        location.reload();
-    } catch (error) {
+        alert('Contact system administrator.');
         console.error(error);
     }
 }
