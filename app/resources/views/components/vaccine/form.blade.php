@@ -1,4 +1,4 @@
-<form id="vaccineForm" onsubmit="sendForm(event)">
+<form id="vaccineForm" onsubmit="SendForm(event)">
     @csrf
     <div class="mb-3">
         <label for="vaccine-name" class="form-label">Name</label>

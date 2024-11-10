@@ -1,9 +1,23 @@
 import { Modal } from 'bootstrap'
+import DisableInputs from '../utils/DisableInputs.js';
+import EnableInputs from "../utils/EnableInputs.js";
+import SendForm from "./SendForm.js";
 
 window.createVaccine = function () {
     const modal = new Modal('#vaccineModal');
     modal.show();
 };
+
+const fillVaccineInputs = (vaccineData) => {
+    const inputName = document.getElementById('vaccine-name');
+    const inputBatch = document.getElementById('vaccine-batch');
+    const inputExpirationDate = document.getElementById('vaccine-expiration-date');
+
+    inputName.value = vaccineData.name;
+    inputBatch.value = vaccineData.batch;
+    inputExpirationDate.value = vaccineData.expiration_date;
+}
+
 
 window.showVaccine = async function (idVaccine) {
     try {
@@ -11,9 +25,12 @@ window.showVaccine = async function (idVaccine) {
 
         const vaccineData = await response.json();
 
-        document.getElementById('vaccine-name').value = vaccineData.name;
-        document.getElementById('vaccine-batch').value = vaccineData.batch;
-        document.getElementById('vaccine-expiration-date').value = vaccineData.expiration_date;
+        fillVaccineInputs(vaccineData);
+        DisableInputs([
+            'vaccine-name',
+            'vaccine-batch',
+            'vaccine-expiration-date'
+        ]);
 
         let submitButton = document.getElementById('vaccineSubmitButton');
         submitButton.setAttribute('type', 'button');
@@ -30,33 +47,15 @@ window.showVaccine = async function (idVaccine) {
     }
 };
 
-window.sendForm = async function (event) {
-    event.preventDefault();
-
-    const form = event.target;
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch('/vaccine', {
-            method: 'POST',
-            credentials: "same-origin",
-            body: formData,
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            }
-        });
-
-        const modal = new Modal('#vaccineModal');
-        modal.hide();
-        location.reload();
-        // Add validations
-    } catch (error) {
-        console.error(error);
-    }
-}
+window.SendForm = SendForm;
 
 let modal = document.getElementById('vaccineModal');
 modal.addEventListener('hidden.bs.modal', event => {
+    EnableInputs([
+        'vaccine-name',
+        'vaccine-batch',
+        'vaccine-expiration-date'
+    ]);
     let submitButton = document.getElementById('vaccineSubmitButton');
     submitButton.setAttribute('type', 'submit');
     submitButton.textContent = 'Save';

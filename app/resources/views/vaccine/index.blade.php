@@ -15,5 +15,8 @@
 
         <livewire:tables.vaccine-table/>
 @endsection
+@push('scripts')
+    @vite('resources/js/vaccine/index.js')
+@endpush
 
 

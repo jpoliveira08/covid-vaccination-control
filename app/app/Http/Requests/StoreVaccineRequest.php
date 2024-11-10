@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreVaccineRequest extends FormRequest
@@ -26,5 +28,17 @@ class StoreVaccineRequest extends FormRequest
             'batch' => ['required', 'string'],
             'expiration_date' => ['required', 'string'],
         ];
+    }
+
+    /**
+     * @param Validator $validator
+     * @return mixed
+     * @throws HttpResponseException
+     */
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(
+            response()->json($validator->errors(), 422)
+        );
     }
 }
