@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('employee_vaccinations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(Employee::class)
+            $table->foreignId('employee_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignId(Vaccine::class)
+            $table->foreignId('vaccine_id')
                 ->constrained()
                 ->cascadeOnDelete();
             $table->tinyInteger('dose_number');

@@ -10,9 +10,19 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+
+    protected $table = 'employees';
+
+    protected $guarded = [];
+
     public function vaccines()
     {
-        return $this->belongsToMany(Vaccine::class)
+        return $this->belongsToMany(
+            related: Vaccine::class,
+            table: 'employee_vaccination',
+            foreignPivotKey: 'employee_id',
+            relatedPivotKey: 'vaccine_id',
+        )
             ->withPivot(['dose_number', 'dose_date'])
             ->withTimestamps();
     }

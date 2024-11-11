@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
@@ -25,5 +26,25 @@ class EmployeeControllerTest extends TestCase
         $this->get(route('employee.create'))
             ->assertStatus(200)
             ->assertViewIs('employee.create');
+    }
+
+    #[Test]
+    public function it_creates_employee_without_vaccine(): void
+    {
+        $this->withoutExceptionHandling();
+
+        $response = $this
+            ->followingRedirects()
+            ->post(route('employee.store'), [
+                'name' => 'Joao',
+                'cpf' => '08190242016',
+                'birth_date' => '2027-11-06',
+            ]);
+
+        $employee = Employee::first();
+        $this->assertEquals(1, Employee::count());
+        $this->assertEquals('Joao', $employee->name);
+        $this->assertEquals('08190242016', $employee->cpf);
+        $this->assertEquals('2027-11-06', $employee->birth_date);
     }
 }

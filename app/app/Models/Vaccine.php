@@ -10,11 +10,18 @@ class Vaccine extends Model
 {
     use HasFactory;
 
+    protected $table = 'vaccines';
+
     protected $guarded = [];
 
     public function employees()
     {
-        return $this->belongsToMany(Employee::class)
+        return $this->belongsToMany(
+            related: Employee::class,
+            table: 'employee_vaccination',
+            foreignPivotKey: 'employee_id',
+            relatedPivotKey: 'vaccine_id',
+        )
             ->withPivot(['dose_number', 'dose_date'])
             ->withTimestamps();
     }

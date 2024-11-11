@@ -16,7 +16,8 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '~fontawesome': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free')
+            '~fontawesome': path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-free'),
+            '~toastr': path.resolve(__dirname, 'node_modules/toastr'),
         }
     }
 });

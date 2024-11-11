@@ -16,6 +16,15 @@ final class VaccineTable extends PowerGridComponent
 {
     public string $tableName = 'vaccines';
 
+    public function setUp(): array
+    {
+        return [
+            PowerGrid::footer()
+                ->showRecordCount(mode: 'full')
+                ->showPerPage(perPage: 10, perPageValues: [0, 50, 100, 500]),
+        ];
+    }
+
     public function datasource(): ?Builder
     {
         return Vaccine::query();
@@ -24,7 +33,6 @@ final class VaccineTable extends PowerGridComponent
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id')
             ->add('name')
             ->add('batch')
             ->add('expiration_date');
@@ -33,11 +41,10 @@ final class VaccineTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id'),
             Column::make('Name', 'name')
-                ->sortable()
-                ->searchable(),
-            Column::make('Batch', 'batch'),
+                ->sortable(),
+            Column::make('Batch', 'batch')
+                ->sortable(),
             Column::make('Expiration date', 'expiration_date'),
             Column::action('Action'),
         ];

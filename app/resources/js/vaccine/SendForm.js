@@ -12,23 +12,25 @@ const SendForm = async (event) => {
     const url = UrlBuilder(formMethod, idVaccine).build();
     try {
         const response = await FetchRequest(url, formMethod, formData);
-        alert(response.message);
+        toastr.success(response.message);
 
         const modal = new Modal('#vaccineModal');
         modal.hide();
-        location.reload();
+        window.setTimeout(function () {
+            window.location.reload();
+        }, 800);
     } catch (error) {
         if (error.status === 422) {
             let errorMessages = '';
             Object.keys(error.errors).forEach((field) => {
-                errorMessages += `${field}: ${error.errors[field].join(', ')}\n`;
+                errorMessages += `${error.errors[field].join(', ')}<br>`;
             });
 
-            alert(errorMessages);
+            toastr.warning(errorMessages);
             return;
         }
 
-        alert('Contact system administrator.');
+        toast.error('Contact system administrator.');
         console.error(error);
     }
 }
