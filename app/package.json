@@ -19,6 +19,7 @@
         "@fortawesome/fontawesome-free": "^6.6.0",
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
-        "toastr": "^2.1.4"
+        "toastr": "^2.1.4",
+        "virtual-select-plugin": "^1.0.46"
     }
 }

@@ -8,6 +8,7 @@ Route::get('/', function () {
     return view('home.index');
 });
 
+Route::get('vaccine/search', [VaccineController::class, 'search']);
 Route::resource('vaccine', VaccineController::class);
 
 Route::resource('employee', EmployeeController::class);

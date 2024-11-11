@@ -8,7 +8,8 @@ export default defineConfig({
             input: [
                 'resources/sass/app.scss',
                 'resources/js/app.js',
-                'resources/js/vaccine/index.js'
+                'resources/js/vaccine/index.js',
+                'resources/js/employee/index.js'
             ],
             refresh: true,
         }),

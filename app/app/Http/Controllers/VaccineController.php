@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Vaccine\SearchVaccineRequest;
 use App\Http\Requests\Vaccine\StoreVaccineRequest;
 use App\Http\Requests\Vaccine\UpdateVaccineRequest;
 use App\Models\Vaccine;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class VaccineController extends Controller
 {
@@ -60,17 +62,42 @@ class VaccineController extends Controller
         ]);
     }
 
-    /**
-     * @param UpdateVaccineRequest $request
-     * @param Vaccine $vaccine
-     * @return JsonResponse
-     */
     public function update(UpdateVaccineRequest $request, Vaccine $vaccine): JsonResponse
     {
         $vaccine->update($request->validated());
 
         return response()->json([
             'message' => 'The vaccine was successfully updated.',
+        ]);
+    }
+
+    public function search(SearchVaccineRequest $request)
+    {
+        $searchValue = $request->query('search');
+        $perPage = $request->query('per_page', 10);
+
+        if (empty($searchValue)) {
+            return response()->json([
+                'options' => [],
+                'total' => 0,
+            ]);
+        }
+
+        $vaccines = Vaccine::where('name', 'like', '%' . $searchValue . '%')
+            ->orWhere('batch', 'like', '%' . $searchValue . '%')
+            ->paginate($perPage);
+
+        $options = $vaccines->map(function ($vaccine) {
+            $label = "Name: {$vaccine->name}, Batch: {$vaccine->batch}, Expiration date: {$vaccine->expiration_date}";
+            return [
+                'value' => $vaccine->id,
+                'label' => $label,
+            ];
+        });
+
+        return response()->json([
+            'options' => $options,
+            'total' => $vaccines->total(),
         ]);
     }
 }
