@@ -8,4 +8,5 @@
         Employees
     @endsection
     <x-employee.create-button/>
+    <livewire:tables.employee-table/>
 @endsection
