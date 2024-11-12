@@ -68,6 +68,31 @@ class ValidEmployeeVaccinationTest extends TestCase
     }
 
     #[Test]
+    public function rule_passes_it_has_no_null_values_isolated()
+    {
+        $vaccines = [
+            [
+                'id_vaccine' => null,
+                'dose_date' => null,
+                'dose_number' => null
+            ],
+            [
+                'id_vaccine' => 1,
+                'dose_date' => '2019-01-01',
+                'dose_number' => 2
+            ],
+        ];
+
+        (new ValidEmployeeVaccination())->validate(
+            attribute: 'vaccines',
+            value: $vaccines,
+            fail: fn () => $this->fail('The rule should pass.')
+        );
+
+        $this->assertTrue(true);
+    }
+
+    #[Test]
     public function rules_fails_with_employee_vaccination_partially_filled()
     {
         $vaccines = [

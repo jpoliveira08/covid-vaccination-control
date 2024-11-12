@@ -15,7 +15,6 @@ class StoreEmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        dd(request()->all());
         return true;
     }
 

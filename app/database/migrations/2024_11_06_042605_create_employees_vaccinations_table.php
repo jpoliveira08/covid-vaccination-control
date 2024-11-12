@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_vaccinations', function (Blueprint $table) {
+        Schema::create('employees_vaccinations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')
-                ->constrained()
+            $table->foreignId('id_employee')
+                ->constrained('employees')
                 ->cascadeOnDelete();
-            $table->foreignId('vaccine_id')
-                ->constrained()
+            $table->foreignId('id_vaccine')
+                ->constrained('vaccines')
                 ->cascadeOnDelete();
             $table->tinyInteger('dose_number');
             $table->date('dose_date');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_vaccinations');
+        Schema::dropIfExists('employees_vaccinations');
     }
 };

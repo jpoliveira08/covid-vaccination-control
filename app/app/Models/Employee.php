@@ -19,9 +19,9 @@ class Employee extends Model
     {
         return $this->belongsToMany(
             related: Vaccine::class,
-            table: 'employee_vaccination',
-            foreignPivotKey: 'employee_id',
-            relatedPivotKey: 'vaccine_id',
+            table: 'employees_vaccinations',
+            foreignPivotKey: 'id_employee',
+            relatedPivotKey: 'id_vaccine',
         )
             ->withPivot(['dose_number', 'dose_date'])
             ->withTimestamps();

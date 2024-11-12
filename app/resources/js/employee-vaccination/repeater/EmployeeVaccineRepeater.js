@@ -5,7 +5,7 @@ const EmployeeVaccineRepeater = () => {
 
     InitializeVaccineVirtualSelect(
         document.querySelector('.vaccineSelect'),
-        `vaccines[${vaccineInputNumber}][id]`
+        `vaccines[${vaccineInputNumber}][id_vaccine]`
     );
 
     const addVaccineRow = (container) => {
@@ -16,7 +16,7 @@ const EmployeeVaccineRepeater = () => {
 
         InitializeVaccineVirtualSelect(
             row.querySelector('.vaccineSelect'),
-            `vaccines[${vaccineInputNumber}][id]`
+            `vaccines[${vaccineInputNumber}][id_vaccine]`
         );
 
         row.querySelector('.remove-vaccine').addEventListener('click', () => {

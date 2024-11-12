@@ -19,24 +19,19 @@ class ValidEmployeeVaccination implements ValidationRule
             return;
         }
 
-        $numberOfEmployeeVaccinations = count($value);
-        $numberOfEmployeeVaccinationsFields = 3;
-        $numberOfNullValues = 0;
-        $numberOfFilledValues = 0;
         foreach ($value as $arrayValue) {
-            foreach ($arrayValue as $employeeVaccinationInput) {
-                if ($employeeVaccinationInput === null) {
-                    $numberOfNullValues++;
-                } else {
-                    $numberOfFilledValues++;
+            $countValues = 3;
+
+            foreach ($arrayValue as $inputKey => $inputValue) {
+                if ($inputValue === null) {
+                    $countValues--;
                 }
             }
-        }
-        if (
-            $numberOfNullValues !== ($numberOfEmployeeVaccinations * $numberOfEmployeeVaccinationsFields) &&
-            $numberOfFilledValues !== ($numberOfEmployeeVaccinations * $numberOfEmployeeVaccinationsFields)
-        ) {
-            $fail('The :attribute must be an valid array.');
+
+            if ($countValues < 3 && $countValues > 0) {
+                $fail('The :attribute must be an valid array.');
+                return;
+            }
         }
     }
 }
