@@ -22,6 +22,11 @@ class EmployeeController extends Controller
         return view('employee.create');
     }
 
+    public function show(Employee $employee): View
+    {
+        return view('employee.show', compact('employee'));
+    }
+
     public function store(StoreEmployeeRequest $request, EmployeeService $employeeService)
     {
         $employeeService->store($request->validated());

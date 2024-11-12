@@ -20,7 +20,7 @@ class StoreEmployeeRequestTest extends TestCase
         $rules = [
             'name' => ['required', 'string'],
             'cpf' => ['required', 'string', new ValidCpf()],
-            'birth_date' => ['required', 'string'],
+            'birth_date' => ['required', 'date'],
             'has_comorbidity' => ['nullable', 'boolean'],
             'vaccines' => ['nullable', new ValidEmployeeVaccination()],
         ];

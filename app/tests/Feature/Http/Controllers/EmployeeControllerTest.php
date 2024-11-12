@@ -29,6 +29,16 @@ class EmployeeControllerTest extends TestCase
     }
 
     #[Test]
+    public function it_can_renders_employee_show_view()
+    {
+        $employee = Employee::factory()->create();
+
+        $this->get(route('employee.show', ['employee' => $employee->id]))
+            ->assertStatus(200)
+            ->assertViewIs('employee.show');
+    }
+
+    #[Test]
     public function it_creates_employee_without_vaccine(): void
     {
         $this->withoutExceptionHandling();
