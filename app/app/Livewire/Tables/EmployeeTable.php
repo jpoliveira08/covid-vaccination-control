@@ -32,7 +32,7 @@ final class EmployeeTable extends PowerGridComponent
     {
         return PowerGrid::fields()
             ->add('name')
-            ->add('cpf', fn (Employee $model) => substr($model->cpf, 0, 3) . '.***.***-**')
+            ->add('cpf', fn (Employee $model) => formatCpf($model->cpf))
             ->add('birth_date');
     }
 

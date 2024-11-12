@@ -9,7 +9,9 @@
         Home
     @endsection
     @section('content')
-        Welcome
+        <p class="fs-3">
+            Welcome to the Employee Vaccination Control System!
+        </p>
     @endsection
 @endsection
 

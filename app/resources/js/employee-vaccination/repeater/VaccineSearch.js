@@ -14,10 +14,6 @@ const VaccineSearch = async (searchValue, virtualSelect) => {
             const data = await response.json();
 
             virtualSelect.setServerOptions(data.options);
-
-            if (data.total > 10) {
-                console.log('Há mais resultados disponíveis');
-            }
         } catch (error) {
             console.error('Erro ao buscar vacinas:', error);
         }

@@ -12,6 +12,8 @@ class EmployeeService
     public function store(array $employeeData)
     {
         $employeeData = $this->cleanEmptyEmployeeVaccination($employeeData);
+        $employeeData['cpf'] = clean_cpf($employeeData['cpf']);
+
         $vaccines = !empty($employeeData['vaccines']) ? $employeeData['vaccines'] : [];
         unset($employeeData['vaccines']);
 

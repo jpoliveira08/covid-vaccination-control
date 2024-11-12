@@ -30,7 +30,7 @@ const SendForm = async (event) => {
             return;
         }
 
-        toast.error('Contact system administrator.');
+        toastr.error('Contact system administrator.');
         console.error(error);
     }
 }

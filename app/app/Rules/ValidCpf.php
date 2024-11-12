@@ -13,11 +13,12 @@ class ValidCpf implements ValidationRule
      * Run the validation rule.
      *
      * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @see https://github.com/LaravelLegends/pt-br-validator/blob/master/src/pt-br-validator/Rules/Cpf.php
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $message = 'The :attribute must be a valid CPF.';
-        $c = preg_replace('/\D/', '', $value);
+        $c = clean_cpf($value);
 
         if (strlen($c) != 11 || preg_match("/^{$c[0]}{11}$/", $c)) {
             $fail($message);

@@ -8,6 +8,7 @@ use App\Http\Requests\Vaccine\SearchVaccineRequest;
 use App\Http\Requests\Vaccine\StoreVaccineRequest;
 use App\Http\Requests\Vaccine\UpdateVaccineRequest;
 use App\Models\Vaccine;
+use App\Services\VaccineService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -32,9 +33,9 @@ class VaccineController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreVaccineRequest $request)
+    public function store(StoreVaccineRequest $request, VaccineService $vaccineService): JsonResponse
     {
-        Vaccine::create($request->validated());
+        $vaccineService->store($request->validated());
 
         return response()->json([
             'message' => 'The vaccine was successfully created',
@@ -51,20 +52,24 @@ class VaccineController extends Controller
 
     /**
      * @param Vaccine $vaccine
-     * @return \Illuminate\Http\JsonResponse
+     * @param VaccineService $vaccineService
+     * @return JsonResponse
      */
-    public function destroy(Vaccine $vaccine): JsonResponse
+    public function destroy(Vaccine $vaccine, VaccineService $vaccineService): JsonResponse
     {
-        $vaccine->delete();
+        $vaccineService->destroy($vaccine);
 
         return response()->json([
             'message' => 'The vaccine was successfully deleted.',
         ]);
     }
 
-    public function update(UpdateVaccineRequest $request, Vaccine $vaccine): JsonResponse
-    {
-        $vaccine->update($request->validated());
+    public function update(
+        UpdateVaccineRequest $request,
+        Vaccine $vaccine,
+        VaccineService $vaccineService
+    ): JsonResponse {
+        $vaccineService->update($request->validated(), $vaccine);
 
         return response()->json([
             'message' => 'The vaccine was successfully updated.',

@@ -3,10 +3,13 @@ import InitializeVaccineVirtualSelect from './InitializeVaccineVirtualSelect.js'
 const EmployeeVaccineRepeater = () => {
     let vaccineInputNumber = 0;
 
-    InitializeVaccineVirtualSelect(
-        document.querySelector('.vaccineSelect'),
-        `vaccines[${vaccineInputNumber}][id_vaccine]`
-    );
+    const vaccinesSelect = document.querySelectorAll('.vaccineSelect');
+    vaccinesSelect.forEach(vaccineSelect => {
+        InitializeVaccineVirtualSelect(
+            vaccineSelect,
+            `vaccines[${vaccineInputNumber}][id_vaccine]`
+        );
+    });
 
     const addVaccineRow = (container) => {
         vaccineInputNumber++;

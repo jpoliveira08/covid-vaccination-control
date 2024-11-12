@@ -16,7 +16,7 @@ class StoreVaccineRequestTest extends TestCase
         $rules = [
             'name' => ['required', 'string'],
             'batch' => ['required', 'string'],
-            'expiration_date' => ['required', 'string'],
+            'expiration_date' => ['required', 'date'],
         ];
 
         $this->assertEquals($rules, $request->rules());

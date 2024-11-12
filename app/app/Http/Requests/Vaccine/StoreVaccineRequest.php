@@ -26,7 +26,7 @@ class StoreVaccineRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'batch' => ['required', 'string'],
-            'expiration_date' => ['required', 'string'],
+            'expiration_date' => ['required', 'date'],
         ];
     }
 
@@ -35,7 +35,7 @@ class StoreVaccineRequest extends FormRequest
      * @return mixed
      * @throws HttpResponseException
      */
-    protected function failedValidation(Validator $validator)
+    protected function failedValidation(Validator $validator): HttpResponseException
     {
         throw new HttpResponseException(
             response()->json($validator->errors(), 422)

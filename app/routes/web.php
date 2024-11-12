@@ -9,6 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('vaccine/search', [VaccineController::class, 'search']);
-Route::resource('vaccine', VaccineController::class);
+Route::resource('vaccine', VaccineController::class)
+    ->except('edit');
 
 Route::resource('employee', EmployeeController::class);
