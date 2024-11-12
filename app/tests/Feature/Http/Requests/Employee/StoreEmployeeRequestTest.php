@@ -6,6 +6,7 @@ namespace Tests\Feature\Http\Requests\Employee;
 
 use App\Http\Requests\Employee\StoreEmployeeRequest;
 use App\Rules\ValidCpf;
+use App\Rules\ValidEmployeeVaccination;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -20,7 +21,8 @@ class StoreEmployeeRequestTest extends TestCase
             'name' => ['required', 'string'],
             'cpf' => ['required', 'string', new ValidCpf()],
             'birth_date' => ['required', 'string'],
-            'has_comorbidity' => ['boolean'],
+            'has_comorbidity' => ['nullable', 'boolean'],
+            'vaccines' => ['nullable', new ValidEmployeeVaccination()],
         ];
 
         $this->assertEquals($rules, $request->rules());

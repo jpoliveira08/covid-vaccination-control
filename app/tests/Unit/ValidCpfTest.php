@@ -42,7 +42,7 @@ class ValidCpfTest extends TestCase
     {
         (new ValidCpf())->validate(
             attribute: 'cpf',
-            value: '123.456.789-090',
+            value: '123.456.789-092',
             fail: fn () => $this->assertTrue(true)
         );
     }

@@ -11,14 +11,21 @@
 <form action="{{ route('employee.store') }}" method="POST">
     @csrf
     @method('POST')
+    @if($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
     <div class="row mb-4">
         <div class="col-md-6">
             <label for="employee-name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="employee-name" name="employee" required>
+            <input type="text" class="form-control" id="employee-name" name="name" required>
         </div>
         <div class="col-md-2">
             <label for="cpf" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="validationCustom03" required>
+            <input type="text" class="form-control" id="employee-cpf" name="cpf" required>
         </div>
     </div>
     <div class="row mb-4">
