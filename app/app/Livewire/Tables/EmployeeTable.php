@@ -67,6 +67,7 @@ final class EmployeeTable extends PowerGridComponent
             Button::add('delete')
                 ->slot('<i class="fa-solid fa-trash"></i>')
                 ->class('btn btn-danger btn-sm')
+                ->route('employee.delete', ['employee' => $row->id]),
         ];
     }
 }

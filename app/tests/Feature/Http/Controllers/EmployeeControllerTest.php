@@ -39,6 +39,16 @@ class EmployeeControllerTest extends TestCase
     }
 
     #[Test]
+    public function it_can_renders_employee_delete_view()
+    {
+        $employee = Employee::factory()->create();
+
+        $this->get(route('employee.delete', ['employee' => $employee->id]))
+            ->assertStatus(200)
+            ->assertViewIs('employee.delete');
+    }
+
+    #[Test]
     public function it_creates_employee_without_vaccine(): void
     {
         $this->withoutExceptionHandling();

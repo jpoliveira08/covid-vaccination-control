@@ -12,4 +12,5 @@ Route::get('vaccine/search', [VaccineController::class, 'search']);
 Route::resource('vaccine', VaccineController::class)
     ->except('edit');
 
+Route::get('employee/{employee}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
 Route::resource('employee', EmployeeController::class);

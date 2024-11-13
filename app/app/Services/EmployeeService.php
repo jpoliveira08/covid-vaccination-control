@@ -44,4 +44,9 @@ class EmployeeService
 
         return $employeeData;
     }
+
+    public function destroy(Employee $employee)
+    {
+        return $employee->delete();
+    }
 }
