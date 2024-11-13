@@ -67,4 +67,38 @@ class EmployeeServiceTest extends TestCase
         $this->assertEquals(1, Employee::count());
         $this->assertEquals(1, Vaccine::count());
     }
+
+    #[Test]
+    public function it_can_update_an_employee()
+    {
+        $employee = Employee::factory()->create();
+        $employeeData = [
+            'name' => 'John Doe',
+            'cpf' => '22892680034',
+            'birth_date' => '1990-01-01',
+            'has_comorbidity' => false,
+        ];
+
+        $employeeService = new EmployeeService;
+        $employeeService->update($employeeData, $employee);
+
+        $this->assertEquals(1, Employee::count());
+        $employee = Employee::first();
+        $this->assertEquals($employeeData['name'], $employee->name);
+        $this->assertEquals($employeeData['cpf'], $employee->cpf);
+        $this->assertEquals($employeeData['birth_date'], $employee->birth_date);
+        $this->assertEquals($employeeData['has_comorbidity'], $employee->has_comorbidity);
+    }
+
+    #[Test]
+    public function it_can_delete_an_employee()
+    {
+        $employee = Employee::factory()->create();
+        $this->assertEquals(1, Employee::count());
+
+        $employeeService = new EmployeeService;
+        $employeeService->destroy($employee);
+
+        $this->assertEquals(0, Vaccine::count());
+    }
 }

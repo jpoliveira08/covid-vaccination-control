@@ -26,7 +26,7 @@ class UpdateVaccineRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'batch' => ['required', 'string'],
-            'expiration_date' => ['required', 'string'],
+            'expiration_date' => ['required', 'date'],
         ];
     }
 

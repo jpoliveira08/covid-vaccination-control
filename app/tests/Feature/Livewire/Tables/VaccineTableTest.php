@@ -27,7 +27,7 @@ class VaccineTableTest extends TestCase
         $this->assertEquals(1, Vaccine::count());
 
         Livewire::test(VaccineTable::class)
-            ->assertHasAction('view');
+            ->assertHasAction('show');
     }
 
     #[Test]
@@ -36,7 +36,7 @@ class VaccineTableTest extends TestCase
         $this->assertEquals(0, Vaccine::count());
 
         Livewire::test(VaccineTable::class)
-            ->assertHasAction('view');
+            ->assertHasAction('show');
     }
 
     #[Test]
