@@ -9,7 +9,8 @@ export default defineConfig({
                 'resources/sass/app.scss',
                 'resources/js/app.js',
                 'resources/js/vaccine/index.js',
-                'resources/js/employee/index.js'
+                'resources/js/employee/index.js',
+                'resources/js/employee/edit.js'
             ],
             refresh: true,
         }),

@@ -26,6 +26,28 @@ class EmployeeService
         });
     }
 
+    public function update(array $employeeData, Employee $employee)
+    {
+        $employeeData = $this->cleanEmptyEmployeeVaccination($employeeData);
+        $employeeData['cpf'] = clean_cpf($employeeData['cpf']);
+
+        $vaccines = !empty($employeeData['vaccines']) ? $employeeData['vaccines'] : [];
+        unset($employeeData['vaccines']);
+
+        return DB::transaction(function () use ($employee, $employeeData, $vaccines) {
+            $employee->update($employeeData);
+
+            if ($vaccines) {
+                $employee->vaccines()->syncWithoutDetaching($vaccines);
+            }
+        });
+    }
+
+    public function destroy(Employee $employee)
+    {
+        return $employee->delete();
+    }
+
     private function cleanEmptyEmployeeVaccination(array $employeeData): array
     {
         if (!isset($employeeData['vaccines'])) {
@@ -43,10 +65,5 @@ class EmployeeService
         }
 
         return $employeeData;
-    }
-
-    public function destroy(Employee $employee)
-    {
-        return $employee->delete();
     }
 }

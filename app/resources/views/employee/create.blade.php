@@ -38,7 +38,7 @@
     </div>
     <div class="row mb-4 ms-1">
         <div class="form-check">
-            <input type="checkbox" class="form-check-input @error('has_comorbidity') is-invalid @enderror" id="has-comorbidity" name="has_comorbidity">
+            <input type="checkbox" class="form-check-input @error('has_comorbidity') is-invalid @enderror" id="has-comorbidity" name="has_comorbidity @checked(old('has_comorbidity'))">
             <label class="form-check-label" for="has_comorbidity">Has comorbidity</label>
             @error('has_comorbidity')
                 <div class="invalid-feedback">{{ $message }}</div>
