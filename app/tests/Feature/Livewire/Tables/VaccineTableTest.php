@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Livewire\Tables;
 
 use App\Livewire\Tables\VaccineTable;

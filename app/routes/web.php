@@ -8,7 +8,7 @@ Route::get('/', function () {
     return view('home.index');
 });
 
-Route::get('vaccine/search', [VaccineController::class, 'search']);
+Route::get('vaccine/searchForVirtualSelect', [VaccineController::class, 'searchForVirtualSelect']);
 Route::resource('vaccine', VaccineController::class)
     ->except('edit');
 

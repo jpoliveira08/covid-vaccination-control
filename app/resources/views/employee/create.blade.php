@@ -11,6 +11,11 @@
 <form action="{{ route('employee.store') }}" method="POST">
     @csrf
     @method('POST')
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    @endif
     <div class="row mb-4">
         <div class="col-md-6">
             <label for="employee-name" class="form-label">Name</label>

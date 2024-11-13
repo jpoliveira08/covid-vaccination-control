@@ -7,7 +7,6 @@ namespace Tests\Feature\Services;
 use App\Models\Vaccine;
 use App\Services\VaccineService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -19,12 +18,12 @@ class VaccineServiceTest extends TestCase
     public function it_can_create_an_vaccine()
     {
         $vaccineData = [
-            'name' =>  'Pfizer',
+            'name' => 'Pfizer',
             'batch' => '123AS23',
-            'expiration_date' => '2027-05-05'
+            'expiration_date' => '2027-05-05',
         ];
 
-        $vaccineService = new VaccineService();
+        $vaccineService = new VaccineService;
         $vaccineService->store($vaccineData);
 
         $this->assertEquals(1, Vaccine::count());
@@ -39,12 +38,12 @@ class VaccineServiceTest extends TestCase
     {
         $vaccine = Vaccine::factory()->create();
         $vaccineData = [
-            'name' =>  'Pfizer',
+            'name' => 'Pfizer',
             'batch' => '123AS23',
-            'expiration_date' => '2027-05-05'
+            'expiration_date' => '2027-05-05',
         ];
 
-        $vaccineService = new VaccineService();
+        $vaccineService = new VaccineService;
         $vaccineService->update($vaccineData, $vaccine);
 
         $this->assertEquals(1, Vaccine::count());
@@ -60,7 +59,7 @@ class VaccineServiceTest extends TestCase
         $vaccine = Vaccine::factory()->create();
         $this->assertEquals(1, Vaccine::count());
 
-        $vaccineService = new VaccineService();
+        $vaccineService = new VaccineService;
         $vaccineService->destroy($vaccine);
 
         $this->assertEquals(0, Vaccine::count());

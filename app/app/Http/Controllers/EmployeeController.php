@@ -9,8 +9,6 @@ use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Services\EmployeeService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -41,7 +39,15 @@ class EmployeeController extends Controller
 
     public function store(StoreEmployeeRequest $request, EmployeeService $employeeService)
     {
-        $employeeService->store($request->validated());
+        try {
+            $employeeService->store($request->validated());
+        } catch (\Exception $exception) {
+            if ($exception->getCode() === '23000') {
+                return to_route('employee.create')->with('error', 'This CPF is already registered.');
+            }
+
+            return to_route('employee.create')->with('error', 'Contact system administrator.');
+        }
 
         return to_route('employee.index');
     }

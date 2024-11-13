@@ -13,7 +13,7 @@ class UpdateVaccineRequestTest extends TestCase
     #[Test]
     public function it_has_the_correct_rules(): void
     {
-        $request = new UpdateVaccineRequest();
+        $request = new UpdateVaccineRequest;
 
         $rules = [
             'name' => ['required', 'string'],
@@ -27,7 +27,7 @@ class UpdateVaccineRequestTest extends TestCase
     #[Test]
     public function it_authorizes_every_request(): void
     {
-        $request = new UpdateVaccineRequest();
+        $request = new UpdateVaccineRequest;
 
         $this->assertTrue($request->authorize());
     }

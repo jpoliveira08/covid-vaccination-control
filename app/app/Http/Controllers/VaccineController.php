@@ -13,25 +13,16 @@ use Illuminate\Http\JsonResponse;
 
 class VaccineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return view('vaccine.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('vaccine.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreVaccineRequest $request, VaccineService $vaccineService): JsonResponse
     {
         $vaccineService->store($request->validated());
@@ -41,9 +32,6 @@ class VaccineController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Vaccine $vaccine)
     {
         return response()->json($vaccine);
@@ -70,7 +58,7 @@ class VaccineController extends Controller
         ]);
     }
 
-    public function search(SearchVaccineRequest $request)
+    public function searchForVirtualSelect(SearchVaccineRequest $request, VaccineService $vaccineService): JsonResponse
     {
         $searchValue = $request->query('search');
         $perPage = $request->query('per_page', 10);
@@ -82,22 +70,11 @@ class VaccineController extends Controller
             ]);
         }
 
-        $vaccines = Vaccine::where('name', 'like', '%'.$searchValue.'%')
-            ->orWhere('batch', 'like', '%'.$searchValue.'%')
-            ->paginate($perPage);
-
-        $options = $vaccines->map(function ($vaccine) {
-            $label = "Name: {$vaccine->name}, Batch: {$vaccine->batch}, Expiration date: {$vaccine->expiration_date}";
-
-            return [
-                'value' => $vaccine->id,
-                'label' => $label,
-            ];
-        });
+        $searchResult = $vaccineService->searchForVirtualSelect($searchValue, $perPage);
 
         return response()->json([
-            'options' => $options,
-            'total' => $vaccines->total(),
+            'options' => $searchResult['results'],
+            'total' => $searchResult['total'],
         ]);
     }
 }

@@ -22,4 +22,30 @@ class VaccineService
     {
         return $vaccine->update($vaccineData);
     }
+
+    public function searchForVirtualSelect($searchValue, $perPage): array
+    {
+        $vaccines = $this->searchVaccinesPaginated($searchValue, $perPage);
+
+        $options = $vaccines->map(function ($vaccine) {
+            $label = "Name: {$vaccine->name}, Batch: {$vaccine->batch}, Expiration date: {$vaccine->expiration_date}";
+
+            return [
+                'value' => $vaccine->id,
+                'label' => $label,
+            ];
+        });
+
+        return [
+            'results' => $options,
+            'total' => $vaccines->total(),
+        ];
+    }
+
+    private function searchVaccinesPaginated($searchValue, $perPage)
+    {
+        return Vaccine::where('name', 'like', '%'.$searchValue.'%')
+            ->orWhere('batch', 'like', '%'.$searchValue.'%')
+            ->paginate($perPage);
+    }
 }

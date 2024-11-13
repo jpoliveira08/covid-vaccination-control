@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature\Http\Controllers;
 
 use App\Livewire\Tables\VaccineTable;
@@ -59,7 +61,7 @@ class VaccineControllerTest extends TestCase
     #[Test]
     public function it_requires_all_fields_to_be_present(): void
     {
-       $this
+        $this
             ->post(route('vaccine.store'), [
                 'name' => '',
                 'batch' => '',

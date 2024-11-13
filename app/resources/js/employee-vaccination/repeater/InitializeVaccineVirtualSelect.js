@@ -7,6 +7,7 @@ const InitializeVaccineVirtualSelect = (element, inputName) => {
         search: true,
         name: inputName,
         onServerSearch: VaccineSearch,
+        searchPlaceholderText: 'Start typing to search...',
         maxOptions: 100,
     });
 }

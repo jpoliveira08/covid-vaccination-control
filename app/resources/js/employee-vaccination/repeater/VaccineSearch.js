@@ -1,6 +1,6 @@
 const VaccineSearch = async (searchValue, virtualSelect) => {
     try {
-        const response = await fetch(`/vaccine/search?search=${encodeURIComponent(searchValue)}`);
+        const response = await fetch(`/vaccine/searchForVirtualSelect?search=${encodeURIComponent(searchValue)}`);
 
         if (!response.ok) {
             throw new Error('Erro ao buscar vacinas');
