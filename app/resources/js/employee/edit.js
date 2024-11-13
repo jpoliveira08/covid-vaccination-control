@@ -10,12 +10,14 @@ selects.forEach(select => {
         expirationDate: select.dataset.vaccineExpirationDate,
     };
 
+    const optionsWithVaccine = {
+        label: `Name: ${vaccine.name}, Batch: ${vaccine.batch}, Expiration date: ${vaccine.expirationDate}`,
+        value: vaccine.id
+    }
+
     window.VirtualSelect.init({
         ele: select,
-        options: [{
-            label: `Name: ${vaccine.name}, Batch: ${vaccine.batch}, Expiration date: ${vaccine.expirationDate}`,
-            value: vaccine.id
-        }],
+        options: [vaccine.id ? optionsWithVaccine : {}],
         name: select.dataset.inputName,
         autoSelectFirstOption: true,
         searchPlaceholderText: 'Start typing to search...',

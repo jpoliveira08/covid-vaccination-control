@@ -11,7 +11,7 @@ class StoreVaccineRequestTest extends TestCase
     #[Test]
     public function it_has_the_correct_rules(): void
     {
-        $request = new StoreVaccineRequest();
+        $request = new StoreVaccineRequest;
 
         $rules = [
             'name' => ['required', 'string'],

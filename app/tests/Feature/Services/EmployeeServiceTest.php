@@ -8,7 +8,6 @@ use App\Models\Employee;
 use App\Models\Vaccine;
 use App\Services\EmployeeService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -26,7 +25,7 @@ class EmployeeServiceTest extends TestCase
             'has_comorbidity' => false,
         ];
 
-        $employeeService = new EmployeeService();
+        $employeeService = new EmployeeService;
         $employeeService->store($employeeData);
 
         $this->assertEquals(1, Employee::count());
@@ -51,17 +50,17 @@ class EmployeeServiceTest extends TestCase
                 [
                     'id_vaccine' => null,
                     'dose_date' => null,
-                    'dose_number' => null
+                    'dose_number' => null,
                 ],
                 [
                     'id_vaccine' => $vaccine->id,
                     'dose_date' => '2019-01-01',
-                    'dose_number' => 2
+                    'dose_number' => 2,
                 ],
-            ]
+            ],
         ];
 
-        $employeeService = new EmployeeService();
+        $employeeService = new EmployeeService;
         $employeeService->store($employeeData);
         $employee = Employee::first();
         $vaccine = Vaccine::first();

@@ -11,7 +11,6 @@ use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
-use PowerComponents\LivewirePowerGrid\Traits\WithExport;
 
 final class VaccineTable extends PowerGridComponent
 {
@@ -24,7 +23,7 @@ final class VaccineTable extends PowerGridComponent
                 ->showRecordCount(mode: 'full')
                 ->showPerPage(perPage: 10, perPageValues: [0, 50, 100, 500]),
             PowerGrid::header()
-                ->showSearchInput()
+                ->showSearchInput(),
         ];
     }
 

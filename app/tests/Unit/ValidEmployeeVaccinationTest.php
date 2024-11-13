@@ -17,11 +17,11 @@ class ValidEmployeeVaccinationTest extends TestCase
             [
                 'id_vaccine' => 1,
                 'dose_date' => '2019-01-01',
-                'dose_number' => 1
-            ]
+                'dose_number' => 1,
+            ],
         ];
 
-        (new ValidEmployeeVaccination())->validate(
+        (new ValidEmployeeVaccination)->validate(
             attribute: 'vaccines',
             value: $vaccines,
             fail: fn () => $this->fail('The rule should pass.')
@@ -35,7 +35,7 @@ class ValidEmployeeVaccinationTest extends TestCase
     {
         $vaccines = [];
 
-        (new ValidEmployeeVaccination())->validate(
+        (new ValidEmployeeVaccination)->validate(
             attribute: 'vaccines',
             value: $vaccines,
             fail: fn () => $this->assertTrue(true)
@@ -49,16 +49,16 @@ class ValidEmployeeVaccinationTest extends TestCase
             [
                 'id_vaccine' => null,
                 'dose_date' => null,
-                'dose_number' => null
+                'dose_number' => null,
             ],
             [
                 'id_vaccine' => null,
                 'dose_date' => null,
-                'dose_number' => null
+                'dose_number' => null,
             ],
         ];
 
-        (new ValidEmployeeVaccination())->validate(
+        (new ValidEmployeeVaccination)->validate(
             attribute: 'vaccines',
             value: $vaccines,
             fail: fn () => $this->fail('The rule should pass.')
@@ -74,16 +74,16 @@ class ValidEmployeeVaccinationTest extends TestCase
             [
                 'id_vaccine' => null,
                 'dose_date' => null,
-                'dose_number' => null
+                'dose_number' => null,
             ],
             [
                 'id_vaccine' => 1,
                 'dose_date' => '2019-01-01',
-                'dose_number' => 2
+                'dose_number' => 2,
             ],
         ];
 
-        (new ValidEmployeeVaccination())->validate(
+        (new ValidEmployeeVaccination)->validate(
             attribute: 'vaccines',
             value: $vaccines,
             fail: fn () => $this->fail('The rule should pass.')
@@ -99,16 +99,16 @@ class ValidEmployeeVaccinationTest extends TestCase
             [
                 'id_vaccine' => 1,
                 'dose_date' => null,
-                'dose_number' => null
+                'dose_number' => null,
             ],
             [
                 'id_vaccine' => null,
                 'dose_date' => null,
-                'dose_number' => null
+                'dose_number' => null,
             ],
         ];
 
-        (new ValidEmployeeVaccination())->validate(
+        (new ValidEmployeeVaccination)->validate(
             attribute: 'vaccines',
             value: $vaccines,
             fail: fn () => $this->assertTrue(true)

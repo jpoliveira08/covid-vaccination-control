@@ -15,14 +15,14 @@ class StoreEmployeeRequestTest extends TestCase
     #[Test]
     public function it_has_the_correct_rules(): void
     {
-        $request = new StoreEmployeeRequest();
+        $request = new StoreEmployeeRequest;
 
         $rules = [
             'name' => ['required', 'string'],
-            'cpf' => ['required', 'string', new ValidCpf()],
+            'cpf' => ['required', 'string', new ValidCpf],
             'birth_date' => ['required', 'date'],
             'has_comorbidity' => ['nullable', 'boolean'],
-            'vaccines' => ['nullable', new ValidEmployeeVaccination()],
+            'vaccines' => ['nullable', new ValidEmployeeVaccination],
         ];
 
         $this->assertEquals($rules, $request->rules());
@@ -31,7 +31,7 @@ class StoreEmployeeRequestTest extends TestCase
     #[Test]
     public function it_authorizes_every_request(): void
     {
-        $request = new StoreEmployeeRequest();
+        $request = new StoreEmployeeRequest;
 
         $this->assertTrue($request->authorize());
     }

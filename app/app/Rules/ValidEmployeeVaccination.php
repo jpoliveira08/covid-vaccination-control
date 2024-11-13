@@ -14,8 +14,9 @@ class ValidEmployeeVaccination implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if (!is_array($value) || empty($value)) {
+        if (! is_array($value) || empty($value)) {
             $fail('The :attribute must be an valid array.');
+
             return;
         }
 
@@ -30,6 +31,7 @@ class ValidEmployeeVaccination implements ValidationRule
 
             if ($countValues < 3 && $countValues > 0) {
                 $fail('The :attribute must be an valid array.');
+
                 return;
             }
         }

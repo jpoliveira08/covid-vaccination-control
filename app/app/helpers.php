@@ -7,9 +7,9 @@ if (! function_exists('clean_cpf')) {
     }
 }
 
-if (!function_exists('formatCpf')) {
+if (! function_exists('formatCpf')) {
     function formatCpf($cpf): string
     {
-        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $cpf);
+        return preg_replace("/(\d{3})(\d{3})(\d{3})(\d{2})/", '$1.$2.$3-$4', $cpf);
     }
 }

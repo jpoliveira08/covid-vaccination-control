@@ -27,10 +27,10 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'cpf' => ['required', 'string', new ValidCpf()],
+            'cpf' => ['required', 'string', new ValidCpf],
             'birth_date' => ['required', 'date'],
             'has_comorbidity' => ['nullable', 'boolean'],
-            'vaccines' => ['nullable', new ValidEmployeeVaccination()],
+            'vaccines' => ['nullable', new ValidEmployeeVaccination],
         ];
     }
 }

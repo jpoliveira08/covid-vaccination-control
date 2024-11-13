@@ -53,48 +53,57 @@
         @enderror
         <div id="vaccineRepeaterContainer">
             @php($vaccines = old('vaccines') ?? $employee->vaccines->toArray())
-            @forelse ($vaccines as $i => $vaccine)
-                <input type="hidden" name="vaccineNameOld" value="{{ old('vaccineNameOld', isset($vaccine['name']) ? $vaccine['name'] : '') }}">
-                <input type="hidden" name="vaccineBatchOld" value="{{ old('vaccineBatchOld', isset($vaccine['batch']) ? $vaccine['batch'] : '') }}">
-                <input type="hidden" name="vaccineExpirationDateOld" value="{{ old('vaccineExpirationDateOld', isset($vaccine['expiration_date']) ? $vaccine['expiration_date'] : '') }}">
+            @php($alreadyHasVaccination = array_filter($vaccines, function ($vaccine) {
+                if (array_key_exists('pivot', $vaccine) || (array_key_exists('id_vaccine', $vaccine))) {
+                    return true;
+                }
+
+                return false;
+            }))
+            @if($alreadyHasVaccination)
+                @foreach($vaccines as $i => $vaccine)
+                    <input type="hidden" name="vaccineNameOld" value="{{ old('vaccineNameOld', isset($vaccine['name']) ? $vaccine['name'] : '') }}">
+                    <input type="hidden" name="vaccineBatchOld" value="{{ old('vaccineBatchOld', isset($vaccine['batch']) ? $vaccine['batch'] : '') }}">
+                    <input type="hidden" name="vaccineExpirationDateOld" value="{{ old('vaccineExpirationDateOld', isset($vaccine['expiration_date']) ? $vaccine['expiration_date'] : '') }}">
+                    <div class="row mb-4 vaccine-repeater-item">
+                        <div class="col-md-6">
+                            <label class="form-label d-block">Vaccine description</label>
+                            <div
+                                class="vaccineSelect"
+                                data-vaccine-id="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['id_vaccine'] : $vaccine['id_vaccine'] }}"
+                                data-vaccine-name="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['id_vaccine'] : old('vaccineNameOld') }}"
+                                data-vaccine-batch="{{ isset($vaccine['pivot']) ? $vaccine['batch'] : old('vaccineBatchOld') }}"
+                                data-vaccine-expiration-date="{{ isset($vaccine['pivot']) ? $vaccine['expiration_date'] : old('vaccineExpirationDateOld') }}"
+                                data-input-name="vaccines[{{ $i }}][id_vaccine]"
+                            ></div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Dose date</label>
+                            <input type="date" class="form-control" name="vaccines[{{$i}}][dose_date]" value="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['dose_date'] : $vaccine['dose_date'] }}">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Dose number</label>
+                            <input type="number" class="form-control" name="vaccines[{{$i}}][dose_number]" value="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['dose_number'] : $vaccine['dose_number'] }}">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label"></label>
+                            @if($i > 0)
+                                <button type="button" class="btn btn-danger form-control mt-2 remove-vaccine" onclick="deleteRow(event)">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-primary form-control mt-2 add-vaccine">
+                                    <i class="fa-solid fa-plus"></i>
+                                </button>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            @else
                 <div class="row mb-4 vaccine-repeater-item">
                     <div class="col-md-6">
                         <label class="form-label d-block">Vaccine description</label>
-                        <div
-                            class="vaccineSelect"
-                            data-vaccine-id="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['id_vaccine'] : $vaccine['id_vaccine'] }}"
-                            data-vaccine-name="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['id_vaccine'] : old('vaccineNameOld') }}"
-                            data-vaccine-batch="{{ isset($vaccine['pivot']) ? $vaccine['batch'] : old('vaccineBatchOld') }}"
-                            data-vaccine-expiration-date="{{ isset($vaccine['pivot']) ? $vaccine['expiration_date'] : old('vaccineExpirationDateOld') }}"
-                            data-input-name="vaccines[{{$i}}][id_vaccine]"
-                        ></div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Dose date</label>
-                        <input type="date" class="form-control" name="vaccines[{{$i}}][dose_date]" value="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['dose_date'] : $vaccine['dose_date'] }}">
-                    </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Dose number</label>
-                        <input type="number" class="form-control" name="vaccines[{{$i}}][dose_number]" value="{{ isset($vaccine['pivot']) ? $vaccine['pivot']['dose_number'] : $vaccine['dose_number'] }}">
-                    </div>
-                    <div class="col-md-1">
-                        <label class="form-label"></label>
-                        @if($i > 0)
-                            <button type="button" class="btn btn-danger form-control mt-2 remove-vaccine" onclick="deleteRow(event)">
-                                <i class="fa-solid fa-minus"></i>
-                            </button>
-                        @else
-                            <button type="button" class="btn btn-primary form-control mt-2 add-vaccine">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            @empty
-                <div class="row mb-4 vaccine-repeater-item">
-                    <div class="col-md-6">
-                        <label class="form-label d-block">Vaccine description</label>
-                        <div class="vaccineSelect"></div>
+                        <div class="vaccineSelect" data-input-name="vaccines[0][id_vaccine]"></div>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Dose date</label>
@@ -104,14 +113,8 @@
                         <label class="form-label">Dose number</label>
                         <input type="number" class="form-control" name="vaccines[0][dose_number]">
                     </div>
-                    <div class="col-md-1">
-                        <label class="form-label"></label>
-                        <button type="button" class="btn btn-primary form-control mt-2 add-vaccine">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
                 </div>
-            @endforelse
+            @endif
         </div>
         <div class="row mb-4">
             <div class="col-md-1">

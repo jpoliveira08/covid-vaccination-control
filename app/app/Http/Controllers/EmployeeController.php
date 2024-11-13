@@ -9,7 +9,6 @@ use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Models\Employee;
 use App\Services\EmployeeService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {

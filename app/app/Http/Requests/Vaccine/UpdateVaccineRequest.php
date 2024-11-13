@@ -31,8 +31,8 @@ class UpdateVaccineRequest extends FormRequest
     }
 
     /**
-     * @param Validator $validator
      * @return mixed
+     *
      * @throws HttpResponseException
      */
     protected function failedValidation(Validator $validator)

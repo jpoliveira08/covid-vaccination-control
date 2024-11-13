@@ -10,7 +10,6 @@ use App\Http\Requests\Vaccine\UpdateVaccineRequest;
 use App\Models\Vaccine;
 use App\Services\VaccineService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class VaccineController extends Controller
 {
@@ -50,11 +49,6 @@ class VaccineController extends Controller
         return response()->json($vaccine);
     }
 
-    /**
-     * @param Vaccine $vaccine
-     * @param VaccineService $vaccineService
-     * @return JsonResponse
-     */
     public function destroy(Vaccine $vaccine, VaccineService $vaccineService): JsonResponse
     {
         $vaccineService->destroy($vaccine);
@@ -88,12 +82,13 @@ class VaccineController extends Controller
             ]);
         }
 
-        $vaccines = Vaccine::where('name', 'like', '%' . $searchValue . '%')
-            ->orWhere('batch', 'like', '%' . $searchValue . '%')
+        $vaccines = Vaccine::where('name', 'like', '%'.$searchValue.'%')
+            ->orWhere('batch', 'like', '%'.$searchValue.'%')
             ->paginate($perPage);
 
         $options = $vaccines->map(function ($vaccine) {
             $label = "Name: {$vaccine->name}, Batch: {$vaccine->batch}, Expiration date: {$vaccine->expiration_date}";
+
             return [
                 'value' => $vaccine->id,
                 'label' => $label,
