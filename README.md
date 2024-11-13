@@ -14,7 +14,7 @@
 - Composer
 - NPM: 18.20
 - Artisan
-- 
+
 ### Code quality tools
 - Pint
 - PHPUnit
@@ -106,6 +106,12 @@ docker compose run --rm npm install
 ```bash
 docker compose run --rm npm run build
 ```
+
+## Step 8: Access the application
+
+#### If the FORWARD_NGINX_PORT variable was not modified, the application will be accessible at: http://localhost
+
+#### If the FORWARD_NGINX_PORT variable was customized, the application will be accessible at: http://localhost:{FORWARD_NGINX_PORT}
 
 ### To run the tests cases, simply execute the command:
 ```bash
