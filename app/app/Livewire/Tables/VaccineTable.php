@@ -23,6 +23,8 @@ final class VaccineTable extends PowerGridComponent
             PowerGrid::footer()
                 ->showRecordCount(mode: 'full')
                 ->showPerPage(perPage: 10, perPageValues: [0, 50, 100, 500]),
+            PowerGrid::header()
+                ->showSearchInput()
         ];
     }
 
@@ -43,9 +45,11 @@ final class VaccineTable extends PowerGridComponent
     {
         return [
             Column::make('Name', 'name')
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('Batch', 'batch')
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('Expiration date', 'expiration_date'),
             Column::action('Action'),
         ];

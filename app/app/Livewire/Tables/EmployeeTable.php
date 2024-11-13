@@ -20,6 +20,8 @@ final class EmployeeTable extends PowerGridComponent
             PowerGrid::footer()
                 ->showRecordCount(mode: 'full')
                 ->showPerPage(perPage: 10, perPageValues: [0, 50, 100, 500]),
+            PowerGrid::header()
+                ->showSearchInput()
         ];
     }
 
@@ -40,8 +42,11 @@ final class EmployeeTable extends PowerGridComponent
     {
         return [
             Column::make('Name', 'name')
-                ->sortable(),
-            Column::make('CPF', 'cpf'),
+                ->sortable()
+                ->searchable(),
+            Column::make('CPF', 'cpf')
+                ->sortable()
+                ->searchable(),
             Column::make('Birth Date', 'birth_date'),
             Column::action('Action')
         ];
