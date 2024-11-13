@@ -27,7 +27,7 @@ class StoreEmployeeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'cpf' => ['required', 'string', new ValidCpf],
+            'cpf' => ['required', 'string', new ValidCpf, 'unique:employees,cpf'],
             'birth_date' => ['required', 'date'],
             'has_comorbidity' => ['nullable', 'boolean'],
             'vaccines' => ['nullable', new ValidEmployeeVaccination],
